@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-      const paste = createPaste(body, testNowMs);
+      const paste = await createPaste(body, testNowMs);
       
       const response = {
         id: paste.id,

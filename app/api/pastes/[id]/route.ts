@@ -11,7 +11,7 @@ export async function GET(
     const testNowMs = getTestNowMs(request);
 
     // Get paste and increment views (this is an API fetch)
-    const paste = getPaste(id, true, testNowMs);
+    const paste = await getPaste(id, true, testNowMs);
 
     if (!paste) {
       return errorResponse('Paste not found', 404);

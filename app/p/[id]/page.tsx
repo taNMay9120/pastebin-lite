@@ -8,11 +8,11 @@ interface PageProps {
   };
 }
 
-export default function PastePage({ params }: PageProps) {
+export default async function PastePage({ params }: PageProps) {
   const { id } = params;
 
   // Get paste without incrementing views (HTML view is just for display)
-  const paste = getPaste(id, false);
+  const paste = await getPaste(id, false);
 
   if (!paste) {
     notFound();

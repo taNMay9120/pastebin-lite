@@ -35,7 +35,7 @@ export function getCurrentTime(): number {
   return Date.now();
 }
 
-export function createPaste(request: CreatePasteRequest, testNowMs?: number): Paste {
+export async function createPaste(request: CreatePasteRequest, testNowMs?: number): Promise<Paste> {
   // Validate input
   if (!request.content || typeof request.content !== 'string' || request.content.trim() === '') {
     throw new Error('content is required and must be a non-empty string');
@@ -69,7 +69,7 @@ export function createPaste(request: CreatePasteRequest, testNowMs?: number): Pa
   return paste;
 }
 
-export function getPaste(id: string, increment: boolean = false, testNowMs?: number): Paste | null {
+export async function getPaste(id: string, increment: boolean = false, testNowMs?: number): Promise<Paste | null> {
   const paste = pasteStore.get(id);
   
   if (!paste) {
