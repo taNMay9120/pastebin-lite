@@ -82,23 +82,18 @@ npm start
 
 ### Deploy to Vercel
 
-1. **Push to GitHub:**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
+1. **Deployed Application:**
+   - Your app is now live at: `https://pastebin-lite-git-main-tanmay-s-projects-dcd0ebf5.vercel.app`
+   - All paste links will be generated with this base URL
 
-2. **Deploy to Vercel:**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Select your GitHub repository
-   - Select "Next.js" as the framework
-   - Click "Deploy"
+2. **Environment Variables in Vercel:**
+   - `NEXT_PUBLIC_BASE_URL` is already configured with your Vercel domain
+   - For persistent database (optional): Add `DATABASE_URL` or `REDIS_URL` in project settings
 
-3. **Set Environment Variables** (if using a persistent database):
-   - Add database connection strings in Vercel project settings
-   - Add `NEXT_PUBLIC_BASE_URL` if deploying to a custom domain
+3. **Custom Domain (Optional):**
+   - In Vercel project settings, go to "Domains"
+   - Add your custom domain
+   - Update DNS records according to Vercel's instructions
 
 ## API Endpoints
 
