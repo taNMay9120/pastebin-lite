@@ -107,9 +107,7 @@ export function getPaste(id: string, increment: boolean = false, testNowMs?: num
   return paste;
 }
 
-export function getPasteResponse(paste: Paste, testNowMs?: number): PasteResponse {
-  const now = testNowMs || getCurrentTime();
-  
+export function getPasteResponse(paste: Paste): PasteResponse {
   let remaining_views: number | null = null;
   if (paste.max_views !== undefined) {
     remaining_views = Math.max(0, paste.max_views - paste.views);

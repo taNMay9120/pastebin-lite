@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { getPaste, getPasteResponse } from '@/lib/db';
 import { getTestNowMs, jsonResponse, errorResponse } from '@/lib/utils';
 
@@ -17,7 +17,7 @@ export async function GET(
       return errorResponse('Paste not found', 404);
     }
 
-    const response = getPasteResponse(paste, testNowMs);
+    const response = getPasteResponse(paste);
     return jsonResponse(response, 200);
   } catch (error: any) {
     console.error('Error fetching paste:', error);

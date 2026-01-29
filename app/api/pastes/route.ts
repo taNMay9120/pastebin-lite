@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { createPaste, CreatePasteRequest } from '@/lib/db';
 import { getTestNowMs, jsonResponse, errorResponse } from '@/lib/utils';
 
