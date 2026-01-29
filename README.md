@@ -29,15 +29,38 @@ This application uses an **in-memory data store** for simplicity. Each paste is 
 - View count
 - TTL and max views constraints (if specified)
 
+### ⚠️ Important: Serverless Limitations
+
+On Vercel (serverless), the in-memory storage **does not persist** across:
+- Function cold starts
+- Different deployment instances
+- Preview deployments
+
+For testing/demo purposes, use the same deployment URL consistently. For production use, you must implement persistent storage.
+
 ### Production Considerations
 
-For production deployment on serverless platforms like Vercel, consider:
-- **PostgreSQL** - Full SQL database (e.g., via Vercel Postgres)
-- **Redis** - In-memory key-value store (e.g., via Upstash)
-- **Prisma** - ORM for easier database integration
+For production deployment on serverless platforms like Vercel, you **must** use persistent storage:
+- **Vercel KV (Redis)** - Recommended, easiest to integrate (e.g., via `@vercel/kv`)
+- **Vercel Postgres** - Full SQL database (e.g., via `@vercel/postgres`)
+- **MongoDB** - Document database with free tier (e.g., via `mongodb` package)
+- **Upstash** - Managed Redis service
+
+### Recommended: Vercel KV (Easy Setup)
+
+1. Go to Vercel dashboard → KV → Create Database
+2. Install client:
+   ```bash
+   npm install @vercel/kv
+   ```
+3. Update `lib/db.ts` to use `@vercel/kv` instead of Map
+
+### Alternative: Use Your Own Database
 
 To migrate to a persistent database:
 1. Install database client (e.g., `npm install @vercel/postgres`)
+2. Update `lib/db.ts` to use database queries instead of Map-based storage
+3. Add database initialization in your deployment configuration
 2. Update `lib/db.ts` to use database queries instead of Map-based storage
 3. Add database initialization in your deployment configuration
 
