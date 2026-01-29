@@ -2,11 +2,13 @@ import { NextRequest } from 'next/server';
 import { createPaste, CreatePasteRequest } from '@/lib/db';
 import { getTestNowMs, jsonResponse, errorResponse } from '@/lib/utils';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-
 export async function POST(request: NextRequest) {
   try {
     const testNowMs = getTestNowMs(request);
+    
+    // Get the base URL from environment or construct from request
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                    `${request.nextUrl.protocol}//${request.nextUrl.host}`;
     
     let body: CreatePasteRequest;
     try {
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest) {
       
       const response = {
         id: paste.id,
-        url: `${BASE_URL}/p/${paste.id}`,
+        url: `${baseUrl}/p/${paste.id}`,
       };
 
       return jsonResponse(response, 201);
